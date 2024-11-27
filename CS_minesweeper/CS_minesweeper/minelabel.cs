@@ -10,7 +10,9 @@ namespace CS_minesweeper
 {
     class minelabel : Label
     {
-        public minelabel(Form1 form,int x, int y, int width, int height)
+        public minelabel(Form1 form,int x, int y,
+            int width, int height,
+            int id)
         {
             Size = new Size(width, height);
             Location = new Point(x, y);
