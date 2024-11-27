@@ -12,6 +12,8 @@ namespace CS_minesweeper
 {
     public partial class Form1 : Form
     {
+        public static Button[,] PanelButtons = new Button[10,10];
+        public static Label[,] PanelLabels = new Label[10,10];
         public Form1()
         {
             
@@ -22,9 +24,10 @@ namespace CS_minesweeper
             {
                 sweepbutton button = new sweepbutton(this,i % 10 * 50,i / 10 * 50,50,50,i);
                 Controls.Add(button);
-
+                PanelButtons[i % 10,i / 10] = button;
                 minelabel labels = new minelabel(this,i % 10 * 50, i / 10 * 50 , 50 ,50,i);
                 Controls.Add(labels);
+                PanelLabels[i % 10,i / 10] = labels;
             }            
         }
         /// <summary>
