@@ -16,16 +16,17 @@ namespace CS_minesweeper
         {
             Size = new Size(width, height);
             Location = new Point(x, y);
+            Name = "";
         }
         public static void randombombsetup(object sender, EventArgs e)
         {
-            int[] pointx = new int[10];
-            int[] pointy = new int[10];
-            pointx = Form1.randomgenerate(10);
-            pointy = Form1.randomgenerate(10);
-            for (int i = 0; i < 10; i++)
+            int[] x = new int[10];
+            int[] y = new int[10];
+            x = Form1.randomgenerate(10);
+            y = Form1.randomgenerate(10);
+            for (int i = 0; i < 9; i++)
             {
-                Form1.PanelLabels[pointx[i],pointy[i]].Text = "bomb";
+                Form1.PanelLabels[x[i],y[i]].Text = $"bomb";
             }
             for (int i = 0;i < 100;i++)
             {
