@@ -18,11 +18,12 @@ namespace CS_minesweeper
             Size = new Size(width, height);
             Location = new Point(x, y);
             Name = $"{id}";
+            TextAlign = ContentAlignment.MiddleCenter;
         }
-        public static void randombombsetup(object sender, EventArgs e)
+        public static void Randombombsetup(object sender, EventArgs e)
         {
             int[] x = new int[10];
-            x = Form1.randomgenerate(10,100);
+            x = Form1.Randomgenerate(10,100);
             for (int i = 0; i < 10; i++)
             {
                 int x1 = x[i] % 10;

@@ -52,7 +52,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="gameflow.cs" />
     <Compile Include="minelabel.cs">
       <SubType>Component</SubType>
     </Compile>

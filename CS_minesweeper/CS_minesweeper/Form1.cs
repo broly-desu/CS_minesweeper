@@ -17,6 +17,8 @@ namespace CS_minesweeper
         public Form1()
         {
             InitializeComponent();
+            this.MaximumSize = new System.Drawing.Size(550, 550);
+            this.MinimumSize = new System.Drawing.Size(550, 550);
             ///フォームにボタンとラベルを配置する。
             ///ボタンはマインスイーパーのパネルとして使い、ラベルは爆弾などが描かれた背景として使用する
             for (int i = 0; i < 100; i++)
@@ -28,7 +30,7 @@ namespace CS_minesweeper
                 Controls.Add(labels);
                 PanelLabels[i % 10, i / 10] = labels;
             }
-            minelabel.randombombsetup(this, EventArgs.Empty);
+            minelabel.Randombombsetup(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -40,7 +42,7 @@ namespace CS_minesweeper
         /// <summary>
         /// 乱数を生成する、yahoo知恵袋からパクってきたもの
         /// </summary>
-        public static int[] randomgenerate(int n,int s)
+        public static int[] Randomgenerate(int n,int s)
         {
             int[] random = new int[n];
             for (int i = 0; i < n; i++)
