@@ -48,25 +48,25 @@ namespace CS_minesweeper
                 {
                     int ix = x + i;
                     int jy = y + j;
-                    if (i == 0 && j == 0 )
+                    if (i == 0 && j == 0)
                     {
                         break;
                     }
-                    else if (ix < 10 && jy < 10 && ix > 0 && jy > 0)
+                    else if (ix <= 10 && jy <= 10 && ix >= 0 && jy >= 0)
                     {
-                        if (Form1.PanelLabels[ix, jy].Text == "")
+                        if (Form1.PanelLabels[ix, jy].Text == "0")
                         {
                             buttonchain(Form1.PanelButtons[ix, jy], ix, jy);
                         }
                         else
                         {
-                                       
+
                         }
                     }
                     else
                     {
                         break;
-                    }                
+                    }
                 }
             }
         }
