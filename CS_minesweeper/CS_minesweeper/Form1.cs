@@ -23,14 +23,14 @@ namespace CS_minesweeper
             ///ボタンはマインスイーパーのパネルとして使い、ラベルは爆弾などが描かれた背景として使用する
             for (int i = 0; i < 100; i++)
             {
-                sweepbutton button = new sweepbutton(this, i % 10 * 50, i / 10 * 50, 50, 50, i);
+                Sweepbutton button = new Sweepbutton(i % 10 * 50, i / 10 * 50, 50, 50);
                 Controls.Add(button);
                 PanelButtons[i % 10, i / 10] = button;
-                minelabel labels = new minelabel(this, i % 10 * 50, i / 10 * 50, 50, 50, i);
+                Minelabel labels = new Minelabel(i % 10 * 50, i / 10 * 50, 50, 50, i);
                 Controls.Add(labels);
                 PanelLabels[i % 10, i / 10] = labels;
             }
-            minelabel.Randombombsetup(this, EventArgs.Empty);
+            Minelabel.Randombombsetup(this, EventArgs.Empty);
         }
 
         /// <summary>

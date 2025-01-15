@@ -9,9 +9,9 @@ using System.Net.NetworkInformation;
 
 namespace CS_minesweeper
 {
-    class minelabel : Label
+    class Minelabel : Label
     {
-        public minelabel(Form1 form, int x, int y,
+        public Minelabel(int x, int y,
             int width, int height,
             int id)
         {
@@ -19,6 +19,7 @@ namespace CS_minesweeper
             Location = new Point(x, y);
             Name = $"{id}";
             TextAlign = ContentAlignment.MiddleCenter;
+            Tag = "false";
         }
         public static void Randombombsetup(object sender, EventArgs e)
         {
@@ -47,7 +48,7 @@ namespace CS_minesweeper
                             {
                                 if (Form1.PanelLabels[detectx, detecty].Text == "bomb")
                                 {
-                                    bombvalue = bombvalue + 1;
+                                    bombvalue++;
                                 }
                             }
                         }
