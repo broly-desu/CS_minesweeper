@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CS_minesweeper.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,11 +15,18 @@ namespace CS_minesweeper
     {
         public static Button[,] PanelButtons = new Button[10, 10];
         public static Label[,] PanelLabels = new Label[10, 10];
+        public static TextBox textBox = new TextBox();
+        public static bool firstdetect = true;
         public Form1()
         {
             InitializeComponent();
-            this.MaximumSize = new System.Drawing.Size(550, 550);
-            this.MinimumSize = new System.Drawing.Size(550, 550);
+            this.MaximumSize = new Size(650, 600);
+            this.MinimumSize = new Size(650, 600);
+            PublicLabel publicLabel = new PublicLabel("爆弾の数を入力(初期値は10です)", 500, 15, 0, 500);
+            Controls.Add(publicLabel);
+            PublicTextBox text = new PublicTextBox("bomboption", 400, 15, 0, 525);
+            Controls.Add(text);
+            textBox = text;
             ///フォームにボタンとラベルを配置する。
             ///ボタンはマインスイーパーのパネルとして使い、ラベルは爆弾などが描かれた背景として使用する
             for (int i = 0; i < 100; i++)
@@ -30,7 +38,6 @@ namespace CS_minesweeper
                 Controls.Add(labels);
                 PanelLabels[i % 10, i / 10] = labels;
             }
-            Minelabel.Randombombsetup(this, EventArgs.Empty);
         }
 
         /// <summary>

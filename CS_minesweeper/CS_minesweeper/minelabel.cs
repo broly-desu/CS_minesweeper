@@ -19,13 +19,13 @@ namespace CS_minesweeper
             Location = new Point(x, y);
             Name = $"{id}";
             TextAlign = ContentAlignment.MiddleCenter;
-            Tag = "false";
+            Tag = false;   
         }
-        public static void Randombombsetup(object sender, EventArgs e)
+        public static void Randombombsetup(int bomb)
         {
-            int[] x = new int[10];
-            x = Form1.Randomgenerate(10,100);
-            for (int i = 0; i < 10; i++)
+            int[] x = new int[bomb];
+            x = Form1.Randomgenerate(bomb,100);
+            for (int i = 0; i < x.Length; i++)
             {
                 int x1 = x[i] % 10;
                 int x2 = x[i] / 10;
@@ -37,7 +37,7 @@ namespace CS_minesweeper
                 int pointy = i / 10;
                 if (Form1.PanelLabels[pointx, pointy].Text == "")
                 {
-                    int bombvalue = 0;
+                    int valbomb = 0;
                     for (int j = -1; j <= 1; j++)
                     {
                         for (int k = -1; k <= 1; k++)
@@ -48,12 +48,12 @@ namespace CS_minesweeper
                             {
                                 if (Form1.PanelLabels[detectx, detecty].Text == "bomb")
                                 {
-                                    bombvalue++;
+                                    valbomb++;
                                 }
                             }
                         }
                     }
-                    Form1.PanelLabels[pointx, pointy].Text = $"{bombvalue}";
+                    Form1.PanelLabels[pointx, pointy].Text = $"{valbomb}";
                 }
             }
         }
