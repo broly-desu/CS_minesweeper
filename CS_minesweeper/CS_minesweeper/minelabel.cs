@@ -6,20 +6,48 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography.X509Certificates;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CS_minesweeper
 {
     class Minelabel : Label
     {
+        int pointx;
+        int pointy;
         public Minelabel(int x, int y,
             int width, int height,
             int id)
         {
+            pointx = x / 50;
+            pointy = y / 50;
             Size = new Size(width, height);
             Location = new Point(x, y);
             Name = $"{id}";
             TextAlign = ContentAlignment.MiddleCenter;
-            Tag = false;   
+            Tag = false;
+            MouseDoubleClick += Flagopen;
+        }
+        private void Flagopen(object sender, EventArgs e)
+        {
+            int count = 0;
+            for (int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                {
+                    if (Convert.ToBoolean(Form1.PanelLabels[pointx + i, pointy + j].Tag = false))
+                    {
+                        if (Form1.PanelButtons[pointx + i, pointy + j].Text == "🚩")
+                        {
+                            count++;
+                        }
+                    }
+                }
+            }
+            if (count == int.Parse(Text))
+            {
+                Sweepbutton.Arounddispose(pointx,pointy);
+            }
         }
         public static void Randombombsetup(int bomb)
         {
