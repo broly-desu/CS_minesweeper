@@ -31,7 +31,7 @@ namespace CS_minesweeper
             ///ボタンはマインスイーパーのパネルとして使い、ラベルは爆弾などが描かれた背景として使用する
             for (int i = 0; i < 100; i++)
             {
-                Sweepbutton button = new Sweepbutton(i % 10 * 50, i / 10 * 50, 50, 50);
+                Sweepbutton button = new Sweepbutton(i % 10 * 50, i / 10 * 50, 50, 50,i.ToString());
                 Controls.Add(button);
                 PanelButtons[i % 10, i / 10] = button;
                 Minelabel labels = new Minelabel(i % 10 * 50, i / 10 * 50, 50, 50, i);

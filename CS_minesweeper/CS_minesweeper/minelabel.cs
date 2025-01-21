@@ -35,7 +35,7 @@ namespace CS_minesweeper
             {
                 for (int j = -1; j <= 1; j++)
                 {
-                    if (Convert.ToBoolean(Form1.PanelLabels[pointx + i, pointy + j].Tag = false))
+                    if (!Convert.ToBoolean(Form1.PanelLabels[pointx + i, pointy + j].Tag))
                     {
                         if (Form1.PanelButtons[pointx + i, pointy + j].Text == "🚩")
                         {
@@ -46,7 +46,9 @@ namespace CS_minesweeper
             }
             if (count == int.Parse(Text))
             {
-                Sweepbutton.Arounddispose(pointx,pointy);
+                Sweepbutton sweepbutton = new Sweepbutton(pointx * 50,pointy * 50,1,1,"flag");
+                Controls.Add(sweepbutton);
+                sweepbutton.Arounddispose(pointx,pointy);
             }
         }
         public static void Randombombsetup(int bomb)

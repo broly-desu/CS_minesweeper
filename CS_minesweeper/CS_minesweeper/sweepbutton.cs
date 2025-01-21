@@ -10,31 +10,32 @@ namespace CS_minesweeper
 {
     internal class Sweepbutton : Button
     {
-        private int mineval = 0,L = 0;
+        private int mineval = 0, L = 0;
         private int pointx, pointy;
-        public Sweepbutton( int x, int y,
-            int width, int height)
+        public Sweepbutton(int x, int y,
+            int width, int height,string name)
         {
+            Name = name;
             pointx = x / 50;
             pointy = y / 50;
             Size = new Size(width, height);
             Location = new Point(x, y);
             MouseDown += Onclick;
             Tag = "test";
-            
+
         }
-        public void  Openbutton(int x, int y) 
+        public void Openbutton(int x, int y)
         {
-            if (Form1.PanelButtons[x,y] != null)
+            if (Form1.PanelButtons[x, y] != null)
             {
                 ///マスを開く(ボタンを消すことで開いたように見せる)
                 Control control = Form1.PanelButtons[x, y];
                 Controls.Remove(control);
                 control.Dispose();
             }
-            Form1.PanelButtons[x,y] = null;
+            Form1.PanelButtons[x, y] = null;
         }
-        public void Onclick(object sender,MouseEventArgs e)
+        public void Onclick(object sender, MouseEventArgs e)
         {
 
             switch (e.Button)
@@ -102,17 +103,17 @@ namespace CS_minesweeper
             {
                 MessageBox.Show("ゲームクリア");
             }
-        }        
-        public void Buttonchain(int x,int y)
+        }
+        public void Buttonchain(int x, int y)
         {
-            Openbutton(x,y);
+            Openbutton(x, y);
             ///ボタンを押したとき数字が0(周囲に爆弾が一切ない)なら周囲のマスを開ける
             if (Form1.PanelLabels[x, y].Text == "0")
             {
                 Arounddispose(x, y);
             }
-        }
-        public void Arounddispose(int x,int y)
+        }        
+        public void Arounddispose(int x, int y)
         {
             Openbutton(x, y);
             ///周囲の8マスを開く
@@ -122,7 +123,7 @@ namespace CS_minesweeper
                 {
                     int nextx = x + i;
                     int nexty = y + j;
-                    if (nextx < 10 && nexty < 10 && nextx >= 0 && nexty >= 0 && Form1.PanelLabels[nextx,nexty].Text != "bomb")
+                    if (nextx < 10 && nexty < 10 && nextx >= 0 && nexty >= 0 && Form1.PanelLabels[nextx, nexty].Text != "bomb")
                     {
                         Openbutton(nextx, nexty);
                         if (Convert.ToBoolean(Form1.PanelLabels[nextx, nexty].Tag) == false)
