@@ -35,11 +35,16 @@ namespace CS_minesweeper
             {
                 for (int j = -1; j <= 1; j++)
                 {
-                    if (!Convert.ToBoolean(Form1.PanelLabels[pointx + i, pointy + j].Tag))
+                    int Aroundx = pointx + i;
+                    int Aroundy = pointy + j;
+                    if (Aroundx >= 0 && Aroundy >= 0 && Aroundx < 10 && Aroundy < 10)
                     {
-                        if (Form1.PanelButtons[pointx + i, pointy + j].Text == "🚩")
+                        if (Form1.PanelButtons[Aroundx,Aroundy] != null)
                         {
-                            count++;
+                            if (Form1.PanelButtons[pointx + i, pointy + j].Text == "🚩")
+                            {
+                                count++;
+                            }
                         }
                     }
                 }
@@ -48,13 +53,14 @@ namespace CS_minesweeper
             {
                 Sweepbutton sweepbutton = new Sweepbutton(pointx * 50,pointy * 50,1,1,"flag");
                 Controls.Add(sweepbutton);
-                sweepbutton.Arounddispose(pointx,pointy);
+                MouseEventArgs Vbutton = new MouseEventArgs(MouseButtons.Left,1,0,0,0);
+                sweepbutton.Onclick(sender,Vbutton);
             }
         }
-        public static void Randombombsetup(int bomb)
+        public static void Randombombsetup(int bomb,int ex)
         {
             int[] x = new int[bomb];
-            x = Form1.Randomgenerate(bomb,100);
+            x = Form1.Randomgenerate(bomb,100,ex);
             for (int i = 0; i < x.Length; i++)
             {
                 int x1 = x[i] % 10;

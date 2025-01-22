@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CS_minesweeper.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace CS_minesweeper
 {
     internal class Sweepbutton : Button
     {
-        private int mineval = 0, L = 0;
+        private int mineval = 0;
         private int pointx, pointy;
         public Sweepbutton(int x, int y,
             int width, int height,string name)
@@ -36,9 +37,28 @@ namespace CS_minesweeper
             Form1.PanelButtons[x, y] = null;
         }
         public void Onclick(object sender, MouseEventArgs e)
-        {
-
-            switch (e.Button)
+        { 
+            mineval = 10;
+            try
+            {
+                if (Form1.textBox.Text == "" || int.Parse(Form1.textBox.Text) <= 100)
+                {
+                    if (Form1.textBox.Text != "")
+                    {
+                        mineval = int.Parse(Form1.textBox.Text);
+                    }
+                }
+                else
+                {
+                    throw new ApplicationException("");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("1から100までの数字で入力してください");
+                return;
+            }
+                switch (e.Button)
             {
                 ///マスを右クリック（マスに旗を立てる）時                
                 case MouseButtons.Right:
@@ -57,18 +77,13 @@ namespace CS_minesweeper
                 ///マスを左クリック（マスを開ける）時
                 case MouseButtons.Left:
                     {
-                        if (Form1.PanelButtons[pointx, pointy].Text == "")
+                        if (Text == "")
                         {
-                            ///最初に押されたときに爆弾を設置する(未実装)
+                            ///最初に押されたときに爆弾を設置する
                             if (Form1.firstdetect)
                             {
-                                mineval = 10;
-                                if (Form1.textBox.Text != "")
-                                {
-                                    mineval = int.Parse(Form1.textBox.Text);
-                                }
                                 Form1.firstdetect = false;
-                                Minelabel.Randombombsetup(mineval);
+                                Minelabel.Randombombsetup(mineval,int.Parse(Name));
                             }
                             ///開こうとしてるマスが爆弾かどうか判断する
                             if (Form1.PanelLabels[pointx, pointy].Text == "bomb")
@@ -82,6 +97,8 @@ namespace CS_minesweeper
                                     }
                                 }
                                 MessageBox.Show("ゲームオーバー");
+                                ControlSetup.FieldReset();
+                                ControlSetup.FieldSetup();
                             }
                             else
                             {
@@ -92,14 +109,15 @@ namespace CS_minesweeper
                     }
             }
             ///クリアチェック
-            for (int k = 0; k < 100; k++)
+            int L = 0;
+            for (int i = 0; i < 100; i++)
             {
-                if (Form1.PanelButtons[k % 10, k / 10] is null)
+                if (Form1.PanelButtons[i % 10, i / 10] is null)
                 {
-                    L++;
+                    L = L++;
                 }
             }
-            if (L == 100 - mineval)
+            if (mineval == 100 - L)
             {
                 MessageBox.Show("ゲームクリア");
             }
@@ -108,7 +126,7 @@ namespace CS_minesweeper
         {
             Openbutton(x, y);
             ///ボタンを押したとき数字が0(周囲に爆弾が一切ない)なら周囲のマスを開ける
-            if (Form1.PanelLabels[x, y].Text == "0")
+            if (Form1.PanelLabels[x, y].Text == "0" || Name == "flag")
             {
                 Arounddispose(x, y);
             }
