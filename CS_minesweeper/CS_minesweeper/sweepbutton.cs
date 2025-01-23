@@ -97,8 +97,6 @@ namespace CS_minesweeper
                                     }
                                 }
                                 MessageBox.Show("ゲームオーバー");
-                                ControlSetup.FieldReset();
-                                ControlSetup.FieldSetup();
                             }
                             else
                             {
@@ -112,12 +110,15 @@ namespace CS_minesweeper
             int L = 0;
             for (int i = 0; i < 100; i++)
             {
-                if (Form1.PanelButtons[i % 10, i / 10] is null)
+                if (Form1.PanelButtons[i % 10, i / 10] != null)
                 {
-                    L = L++;
+                    if (Form1.PanelButtons[i % 10, i / 10].Text == "" || Form1.PanelButtons[i % 10, i / 10].Text == "🚩")
+                    {
+                        L++;
+                    }
                 }
             }
-            if (mineval == 100 - L)
+            if (mineval == L)
             {
                 MessageBox.Show("ゲームクリア");
             }

@@ -30,31 +30,34 @@ namespace CS_minesweeper
         }
         private void Flagopen(object sender, EventArgs e)
         {
-            int count = 0;
-            for (int i = -1; i <= 1; i++)
+            if (Text != "bomb")
             {
-                for (int j = -1; j <= 1; j++)
+                int count = 0;
+                for (int i = -1; i <= 1; i++)
                 {
-                    int Aroundx = pointx + i;
-                    int Aroundy = pointy + j;
-                    if (Aroundx >= 0 && Aroundy >= 0 && Aroundx < 10 && Aroundy < 10)
+                    for (int j = -1; j <= 1; j++)
                     {
-                        if (Form1.PanelButtons[Aroundx,Aroundy] != null)
+                        int Aroundx = pointx + i;
+                        int Aroundy = pointy + j;
+                        if (Aroundx >= 0 && Aroundy >= 0 && Aroundx < 10 && Aroundy < 10)
                         {
-                            if (Form1.PanelButtons[pointx + i, pointy + j].Text == "🚩")
+                            if (Form1.PanelButtons[Aroundx, Aroundy] != null)
                             {
-                                count++;
+                                if (Form1.PanelButtons[pointx + i, pointy + j].Text == "🚩")
+                                {
+                                    count++;
+                                }
                             }
                         }
                     }
                 }
-            }
-            if (count == int.Parse(Text))
-            {
-                Sweepbutton sweepbutton = new Sweepbutton(pointx * 50,pointy * 50,1,1,"flag");
-                Controls.Add(sweepbutton);
-                MouseEventArgs Vbutton = new MouseEventArgs(MouseButtons.Left,1,0,0,0);
-                sweepbutton.Onclick(sender,Vbutton);
+                if (count == int.Parse(Text))
+                {
+                    Sweepbutton sweepbutton = new Sweepbutton(pointx * 50, pointy * 50, 1, 1, "flag");
+                    Controls.Add(sweepbutton);
+                    MouseEventArgs Vbutton = new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0);
+                    sweepbutton.Onclick(sender, Vbutton);
+                }
             }
         }
         public static void Randombombsetup(int bomb,int ex)

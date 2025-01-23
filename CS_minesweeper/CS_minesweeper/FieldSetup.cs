@@ -9,16 +9,23 @@ namespace CS_minesweeper
 {
     internal class ControlSetup : Control
     {
-        public static void FieldReset()
-        {
-            Form1 form;
+        /// <summary>
+        /// ボタンとラベルを消去する、初期化用。
+        /// 実装が難しかったため放置
+        /// </summary>
+        /// <param name="f"></param>
+        public static void FieldReset(Form f)
+        { 
             for (int i = 0; i < 100; i++)
             {
                 Button button = Form1.PanelButtons[i % 10, i / 10];
-                form.Controls.Remove(button);
-                button.Dispose();
+                f.Controls.Remove(button);
+                if (button != null)
+                {
+                    button.Dispose();
+                }
                 Label label = Form1.PanelLabels[i % 10, i / 10];
-                form.Controls.Remove(label);
+                f.Controls.Remove(label);
                 label.Dispose();
             }
         }
@@ -26,16 +33,15 @@ namespace CS_minesweeper
         ///フォームにボタンとラベルを配置する。
         ///ボタンはマインスイーパーのパネルとして使い、ラベルは爆弾などが描かれた背景として使用する
         ///</summary>
-        public static void FieldSetup()
+        public static void FieldSetup(Form f)
         {
-            Form1 form1;
             for (int i = 0; i < 100; i++)
             {
                 Sweepbutton button = new Sweepbutton(i % 10 * 50, i / 10 * 50, 50, 50, i.ToString());
-                form1.Controls.Add(button);
+                f.Controls.Add(button);
                 Form1.PanelButtons[i % 10, i / 10] = button;
                 Minelabel labels = new Minelabel(i % 10 * 50, i / 10 * 50, 50, 50, i);
-                form1.Controls.Add(labels);
+                f.Controls.Add(labels);
                 Form1.PanelLabels[i % 10, i / 10] = labels;
             }
         }

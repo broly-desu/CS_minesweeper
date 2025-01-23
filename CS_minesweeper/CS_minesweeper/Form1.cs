@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,10 +29,11 @@ namespace CS_minesweeper
             Controls.Add(publicLabel);
             PublicTextBox text = new PublicTextBox("bomboption", 400, 15, 0, 525);
             Controls.Add(text);
+            Resetbutton button = new Resetbutton(this);
+            Controls.Add(button);
             textBox = text;
-            ControlSetup.FieldSetup();
+            ControlSetup.FieldSetup(this);
         }
-
         /// <summary>
         /// 最初にクリックされたときに爆弾を設置するコード
         /// </summary>
@@ -46,26 +48,31 @@ namespace CS_minesweeper
             int[] random = new int[n];
             for (int i = 0; i < n; i++)
             {
-                random[i] = Ransu(s);
+                random[i] = Ransu(s, ex);
                 for (int j = 0; random[j] == 0; j++)
                 {
-                    if (random[i] == random[j] || random[i] == ex)
+                    if (random[i] == random[j])
                     {
-                        random[i] = Ransu(s);
+                        random[i] = Ransu(s,ex);
                         j = 0;
                     }
                 }
             }
-        return random;
+            return random;
         }
         static Random rand;
-        static int Ransu(int n)
+        static int Ransu(int n, int ex)
         {
             if (rand == null)
             {
                 rand = new Random();
             }
-            return rand.Next(n);
+            int random = rand.Next(n);
+            if (ex == random)
+            {
+                random = Ransu(n, ex);
+            }
+            return random;
         }
     }
 }
