@@ -38,7 +38,7 @@ namespace CS_minesweeper
         }
         public void Onclick(object sender, MouseEventArgs e)
         { 
-            mineval = 10;
+            int mineval = 10;
             try
             {
                 if (Form1.textBox.Text == "" || int.Parse(Form1.textBox.Text) <= 100)
@@ -55,7 +55,7 @@ namespace CS_minesweeper
             }
             catch
             {
-                MessageBox.Show("1から100までの数字で入力してください");
+                MessageBox.Show("1から99までの数字で入力してください");
                 return;
             }
                 switch (e.Button)
@@ -83,27 +83,19 @@ namespace CS_minesweeper
                             if (Form1.firstdetect)
                             {
                                 Form1.firstdetect = false;
-                                Minelabel.Randombombsetup(mineval,int.Parse(Name));
+                                Minelabel.Randombombsetup(mineval, int.Parse(Name));
                             }
                             ///開こうとしてるマスが爆弾かどうか判断する
                             if (Form1.PanelLabels[pointx, pointy].Text == "bomb")
                             {
-                                ///爆弾だったらすべての爆弾を開いてゲームオーバーとする
-                                for (int i = 0; i < 100; i++)
-                                {
-                                    if (Form1.PanelLabels[i % 10, i / 10].Text == "bomb")
-                                    {
-                                        Openbutton(i % 10, i / 10);
-                                    }
-                                }
-                                MessageBox.Show("ゲームオーバー");
+                                Gameover();
                             }
                             else
                             {
                                 Buttonchain(pointx, pointy);
                             }
                         }
-                        break;
+                        break;                        
                     }
             }
             ///クリアチェック
@@ -123,6 +115,18 @@ namespace CS_minesweeper
                 MessageBox.Show("ゲームクリア");
             }
         }
+        private void Gameover()
+        {
+            ///爆弾だったらすべての爆弾を開いてゲームオーバーとする
+            for (int i = 0; i < 100; i++)
+            {
+                if (Form1.PanelLabels[i % 10, i / 10].Text == "bomb")
+                {
+                    Openbutton(i % 10, i / 10);
+                }
+            }
+            MessageBox.Show("ゲームオーバー");
+        }
         public void Buttonchain(int x, int y)
         {
             Openbutton(x, y);
@@ -131,7 +135,26 @@ namespace CS_minesweeper
             {
                 Arounddispose(x, y);
             }
-        }        
+        }     
+        public void Arounddisposeflag(int x,int y)
+        {
+            MouseEventArgs Vbutton = new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0);
+            for (int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                {
+                    int nextx = x + i;
+                    int nexty = y + j;
+                    if (nextx < 10 && nexty < 10 && nextx >= 0 && nexty >= 0)
+                    {
+                        if (Form1.PanelButtons[nextx, nexty] != null)
+                        {
+                            Onclick(Form1.PanelButtons[nextx, nexty],Vbutton);
+                        }
+                    }
+                }
+            }
+        }
         public void Arounddispose(int x, int y)
         {
             Openbutton(x, y);

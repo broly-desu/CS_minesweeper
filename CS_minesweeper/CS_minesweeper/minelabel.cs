@@ -55,8 +55,8 @@ namespace CS_minesweeper
                 {
                     Sweepbutton sweepbutton = new Sweepbutton(pointx * 50, pointy * 50, 1, 1, "flag");
                     Controls.Add(sweepbutton);
-                    MouseEventArgs Vbutton = new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0);
-                    sweepbutton.Onclick(sender, Vbutton);
+                    Form1.PanelButtons[pointx, pointy] = sweepbutton;
+                    sweepbutton.Arounddisposeflag(pointx, pointy);
                 }
             }
         }
